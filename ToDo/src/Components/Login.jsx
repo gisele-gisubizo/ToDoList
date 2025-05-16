@@ -16,7 +16,7 @@ function Login() {
         </div>
       </div>
       <div className='login'>
-        <h2>Login</h2>
+        <h2>SIGN IN</h2>
         <form className='form-login'>
     
         <input type="email" id="email" placeholder='Email' required />

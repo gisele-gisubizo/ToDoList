@@ -59,7 +59,7 @@
   }
  
   .content-signin h3{
-   font-size: 20px;
+   font-size: 24px;
    margin-bottom: 10px;
 
   }
@@ -102,6 +102,7 @@
   .login h2 {
     margin-bottom: 1rem; /* Reduced margin */
     color: #333;
+    
   }
   
   .form-login {
