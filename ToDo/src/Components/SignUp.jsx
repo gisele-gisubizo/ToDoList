@@ -1,5 +1,6 @@
 import React from 'react'
 import '../Style/signup.css'
+import { Link } from 'react-router-dom'
 
 function SignUp() {
   return (
@@ -10,7 +11,9 @@ function SignUp() {
                 <div className='input-signup'><input type="text" placeholder='Names' required /></div>
                 <div className='input-signup'><input type="email" placeholder='Email' required/></div>
                 <div className='input-signup'><input type="password" placeholder='Password' required/></div>
-                <div className='button-signup'><button type='submit'>Sign Up</button></div>
+                <Link to='/Home'>
+                  <div className='button-signup'><button type='submit'>Sign Up</button></div>
+                </Link>
             </form>
         
     </div>

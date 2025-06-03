@@ -1,0 +1,54 @@
+.display-container {
+  padding: 20px;
+  background-color: rgb(3, 28, 21);
+  min-height: 100vh; 
+}
+
+.display-title {
+  margin-left: 30px;
+  color: rgb(220, 220, 159); 
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.display-table {
+  width: 76em; 
+  margin: 0 auto;
+  border-collapse: collapse;
+  background-color: rgba(22, 39, 39, 0.7); 
+  border: 1px solid rgb(248, 248, 144); 
+  border-radius: 20px;
+}
+
+.display-table-header-row {
+  background-color: #333; 
+}
+
+.display-table-header {
+  padding: 12px 15px;
+  color: rgb(220, 220, 159); 
+  font-weight: bold;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgb(248, 248, 144); 
+}
+
+.display-table-row {
+  border-bottom: 1px solid rgb(248, 248, 144); 
+}
+
+.display-table-row:last-child {
+  border-bottom: none; 
+}
+
+.display-table-cell {
+  padding: 12px 15px;
+  color: rgb(226, 255, 194);
+}
+
+.display-table-row:hover {
+  background-color: #444;
+}
+
+.completed-true {
+  color: rgb(183, 185, 186); 
+  text-decoration: line-through; }

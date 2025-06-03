@@ -1,51 +1,46 @@
 import React from 'react'
 import '../Style/Home.css'
+import { useState } from 'react';
 import { FaBars, FaList, FaCalendar, FaCalendarAlt } from 'react-icons/fa';
 import { BsGrid } from 'react-icons/bs';
 import {FaEdit, FaTrash } from 'react-icons/fa'; 
 
 export const array=[{
-  id:1,
-  name:"learnreact",
+   id: 1, name: "Deploy app to hosting platform", completed: "false" ,
   add:[<FaEdit style={{ color: 'blue', fontSize: '17px' }}/>],
   delete:[<FaTrash style={{ color: 'red', fontSize: '17px' }}/>]
 },
 
 {
-  id:1,
-  name:"learnreact",
+   id: 1, name: "Deploy app to hosting platform", completed: "false" ,
   add:[<FaEdit key={1} style={{ color: 'blue', fontSize: '17px' }}/>],
   delete:[<FaTrash key={1} style={{ color: 'red', fontSize: '17px' }}/>]
 },
 
 
 {
-  id:1,
-  name:"learnreact",
+  id: 3, name: "Complete CSS styling for app", completed: "false",
   add:[<FaEdit key={1}  style={{ color: 'blue', fontSize: '17px' }}/>],
   delete:[<FaTrash key={1}  style={{ color: 'red', fontSize: '17px' }}/>]
 },
 
 
 {
-  id:1,
-  name:"learnreact",
+  id: 4, name: "Learn React basics", completed: "false" ,
   add:[<FaEdit  key={1} style={{ color: 'blue', fontSize: '17px' }}/>],
   delete:[<FaTrash  key={1} style={{ color: 'red', fontSize: '17px' }}/>]
 },
 
 
 {
-  id:1,
-  name:"learnreact",
+   id: 5, name: "clean my room", completed: "true" ,
   add:[<FaEdit key={1} style={{ color: 'blue', fontSize: '17px' }}/>],
   delete:[<FaTrash key={1}  style={{ color: 'red', fontSize: '17px' }}/>]
 },
 
 
 {
-  id:1,
-  name:"learnreact",
+   id: 6, name: "talk to the client", completed: "true",
   add:[<FaEdit key={1}  style={{ color: 'blue', fontSize: '17px' }}/>],
   delete:[<FaTrash  key={1} style={{ color: 'red', fontSize: '17px' }}/>]
 },
@@ -53,7 +48,29 @@ export const array=[{
 
 ]
 
+
+
 function Home() {
+  const[tasks,setTasks]=useState(array);
+  const[inputValue,setInputValue]=useState('');
+
+  const handleAddTask=()=>{
+    if(inputValue.trim()){
+      const newTask={
+        id:Date.now(),
+        name:inputValue,
+        add:[<FaEdit key={Date.now()} style={{color:'blue',fontSize:'17px'}}/>],
+         delete:[<FaTrash key={Date.now()} style={{color:'red',fontSize:'17px'}}/>]
+
+      }
+    }
+  };
+
+const handleInputChange=(e)=>{
+  setInputValue(e.target.value);
+
+};
+
   return (
     <div className='home-container'>
       <div className='home-content'>
@@ -70,8 +87,8 @@ function Home() {
                  </select>
          </div>
       
-      <div className=''><input type="text" placeholder='Task' id="tasks"/></div>
-      <div><button className='home-button'>Add task</button></div>
+      <div className=''><input type="text" placeholder='Task' id="tasks" value={inputValue} onChange={handleInputChange}/></div>
+      <div><button className='home-button' onClick={handleAddTask}>Add task</button></div>
       </div>
      
       </div>
