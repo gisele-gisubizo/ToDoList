@@ -12,7 +12,7 @@ export const array=[{
 },
 
 {
-   id: 1, name: "Deploy app to hosting platform", completed: "false" ,
+    id: 2, name: "Write user documentation", completed: "false",
   add:[<FaEdit key={1} style={{ color: 'blue', fontSize: '17px' }}/>],
   delete:[<FaTrash key={1} style={{ color: 'red', fontSize: '17px' }}/>]
 },
