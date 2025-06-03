@@ -1,9 +1,11 @@
 import React from 'react';
 import '../Style/login.css';
 // import { MdEmail } from "react-icons/md";
-// import { RiLockPasswordFill } from "react-icons/ri";
+import { Link } from 'react-router-dom';
 
 function Login() {
+
+
   return (
     <div className='container'>
       <div className='signup'>
@@ -12,7 +14,7 @@ function Login() {
           <p>Then Sign Up and start Scheduling!</p>
         </div>
         <div className='sign-button'>
-          <button>Sign Up</button>
+          <Link to='/SignUp'><button>Sign Up</button></Link>
         </div>
       </div>
       <div className='login'>
