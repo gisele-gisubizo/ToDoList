@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../Style/Home.css';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 import { FaBars, FaList, FaCalendar, FaCalendarAlt } from 'react-icons/fa';
 import { BsGrid } from 'react-icons/bs';
 import { FaEdit, FaTrash } from 'react-icons/fa';
@@ -17,16 +17,23 @@ export const array = [
 function Home() {
   const [tasks, setTasks] = useState(array);
   const [inputValue, setInputValue] = useState('');
-  const navigate = useNavigate(); // Hook for navigation
+  const [editTaskId, setEditTaskId] = useState(null); // Track task being edited
+  const [editValue, setEditValue] = useState(''); // Value for editing
+  const navigate = useNavigate();
+
+  // Get the next incremental ID
+  const getNextId = () => {
+    return tasks.length > 0 ? Math.max(...tasks.map(task => task.id)) + 1 : 1;
+  };
 
   const handleAddTask = () => {
     if (inputValue.trim()) {
       const newTask = {
-        id: Date.now(),
+        id: getNextId(),
         name: inputValue,
         completed: "false",
-        add: [<FaEdit key={Date.now()} style={{ color: 'blue', fontSize: '17px' }} />],
-        delete: [<FaTrash key={Date.now()} style={{ color: 'red', fontSize: '17px' }} />]
+        add: [<FaEdit key={getNextId()} style={{ color: 'blue', fontSize: '17px' }} />], // Use task ID as key
+        delete: [<FaTrash key={getNextId()} style={{ color: 'red', fontSize: '17px' }} />], // Use task ID as key
       };
       const updatedTasks = [...tasks, newTask];
       setTasks(updatedTasks);
@@ -37,6 +44,33 @@ function Home() {
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
+  };
+
+  // Handle edit functionality
+  const handleEdit = (taskId, taskName) => {
+    setEditTaskId(taskId);
+    setEditValue(taskName);
+  };
+
+  const handleSaveEdit = (taskId) => {
+    if (editValue.trim()) {
+      const updatedTasks = tasks.map(task =>
+        task.id === taskId ? { ...task, name: editValue } : task
+      );
+      setTasks(updatedTasks);
+      array.length = 0; // Clear array and repopulate
+      array.push(...updatedTasks);
+      setEditTaskId(null);
+      setEditValue('');
+    }
+  };
+
+  // Handle delete functionality
+  const handleDelete = (taskId) => {
+    const updatedTasks = tasks.filter(task => task.id !== taskId);
+    setTasks(updatedTasks);
+    array.length = 0; // Clear array and repopulate
+    array.push(...updatedTasks);
   };
 
   // Function to navigate to Display page
@@ -52,10 +86,10 @@ function Home() {
         <div className='Home-buttons'>
           <div className='home-dropdown'>
             <select>
-              <option value="Daily">Daily</option>
-              <option value="Weekly">Weekly</option>
-              <option value="Monthly">Monthly</option>
-              <option value="Yearly">Yearly</option>
+              <option value=""> Duration</option>
+              <option value="Weekly">Before noon</option>
+              <option value="Monthly">After noon</option>
+              <option value="Yearly">Midnight</option>
             </select>
           </div>
           <div><input type="text" placeholder='Task' id="tasks" value={inputValue} onChange={handleInputChange} /></div>
@@ -73,15 +107,26 @@ function Home() {
         {tasks.map((item) => (
           <div key={item.id} className='home-array-list'>
             <div className='home-id'>{item.id}</div>
-            <div>{item.name}</div>
+            <div>
+              {editTaskId === item.id ? (
+                <input
+                  type="text"
+                  value={editValue}
+                  onChange={(e) => setEditValue(e.target.value)}
+                  onBlur={() => handleSaveEdit(item.id)}
+                  autoFocus
+                />
+              ) : (
+                item.name
+              )}
+            </div>
             <div className='home-editDelete'>
-              <div className='home-add'>{item.add}</div>
-              <div className='home-delete'>{item.delete}</div>
+              <div className='home-add' onClick={() => handleEdit(item.id, item.name)}>{item.add}</div>
+              <div className='home-delete' onClick={() => handleDelete(item.id)}>{item.delete}</div>
             </div>
           </div>
         ))}
       </div>
-      {/* Add the navigation button */}
       <div className="navigate-button-container">
         <button className="navigate-button" onClick={goToDisplay}>Go to Displayed Tasks</button>
       </div>
