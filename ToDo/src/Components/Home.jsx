@@ -17,11 +17,11 @@ export const array = [
 function Home() {
   const [tasks, setTasks] = useState(array);
   const [inputValue, setInputValue] = useState('');
-  const [editTaskId, setEditTaskId] = useState(null); // Track task being edited
-  const [editValue, setEditValue] = useState(''); // Value for editing
+  const [editTaskId, setEditTaskId] = useState(null); 
+  const [editValue, setEditValue] = useState('');
   const navigate = useNavigate();
 
-  // Get the next incremental ID
+ 
   const getNextId = () => {
     return tasks.length > 0 ? Math.max(...tasks.map(task => task.id)) + 1 : 1;
   };
@@ -32,8 +32,8 @@ function Home() {
         id: getNextId(),
         name: inputValue,
         completed: "false",
-        add: [<FaEdit key={getNextId()} style={{ color: 'blue', fontSize: '17px' }} />], // Use task ID as key
-        delete: [<FaTrash key={getNextId()} style={{ color: 'red', fontSize: '17px' }} />], // Use task ID as key
+        add: [<FaEdit key={getNextId()} style={{ color: 'blue', fontSize: '17px' }} />], 
+        delete: [<FaTrash key={getNextId()} style={{ color: 'red', fontSize: '17px' }} />], 
       };
       const updatedTasks = [...tasks, newTask];
       setTasks(updatedTasks);
@@ -46,7 +46,7 @@ function Home() {
     setInputValue(e.target.value);
   };
 
-  // Handle edit functionality
+ 
   const handleEdit = (taskId, taskName) => {
     setEditTaskId(taskId);
     setEditValue(taskName);
@@ -58,22 +58,21 @@ function Home() {
         task.id === taskId ? { ...task, name: editValue } : task
       );
       setTasks(updatedTasks);
-      array.length = 0; // Clear array and repopulate
+      array.length = 0; 
       array.push(...updatedTasks);
       setEditTaskId(null);
       setEditValue('');
     }
   };
 
-  // Handle delete functionality
+  
   const handleDelete = (taskId) => {
     const updatedTasks = tasks.filter(task => task.id !== taskId);
     setTasks(updatedTasks);
-    array.length = 0; // Clear array and repopulate
+    array.length = 0; 
     array.push(...updatedTasks);
   };
 
-  // Function to navigate to Display page
   const goToDisplay = () => {
     navigate('/display');
   };
